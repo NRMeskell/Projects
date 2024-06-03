@@ -1,0 +1,85 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+
+        <title>Song Ranker</title>
+
+        <style>
+            .float-container {
+                border: 3px solid #fff;
+                padding: 20px;
+                width: 50%;
+                margin: auto;
+            }
+
+            .float-child {
+                width: 50%;
+                float: left;
+                padding: 20px;
+
+                margin: auto;
+            }
+
+            .float-picture{
+                border: 3px solid black;
+                height: 200px;
+                margin: auto;
+            }
+        </style>
+    </head>
+
+    <body>
+        <nav class="navbar navbar-inverse">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href=""> RANKING {{numsongs}} SONGS: {{accuracy}}% </a>
+            </div>
+          </div>
+        </nav>
+
+        <div class="float-container"; style="float: center; width: 75%">
+            <center><font size="+2">Question {{question}}</font></center>
+
+            <div class="float-child">
+                <a href={{preview1}} target="_blank">
+                <center><img class="float-picture"; src="{{album1}}";></center>
+                </a>
+
+                <center><font size="+2"> {{name1}} </font></center>
+                <center><font size="+0"> {{artist1}} </font></center>
+                <form action="." method="POST">
+                    <p><center><input type="submit" class="btn btn-success" name="cmd" value="Song 1" ></center></p>
+                </form>
+            </div>
+
+            <div class="float-child">
+                <a href={{preview2}} target="_blank">
+                <center><img class="float-picture"; src="{{album2}}";></center>
+                </a>
+                <center><font size="+2"> {{name2}} </font></center>
+                <center><font size="+0"> {{artist2}} </font></center>
+                <form action="." method="POST">
+                    <p><center><input type="submit" class="btn btn-success" name="cmd" value="Song 2" ></center></p>
+                </form>
+            </div>
+
+            <div class="row">
+                <form action="." method="POST">
+                    <p><center><input type="submit" class="btn btn-success" name="cmd" value="Skip Question" ></center></p>
+                    <p><center>{{songNum}}</center></p>
+                </form>
+            </div>
+        </div>
+
+    </body>
+</html>
