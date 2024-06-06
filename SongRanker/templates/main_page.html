@@ -17,8 +17,8 @@
 
 	    .song-container {
  		background-color: #E8F5E9;
-		width: 90%;
-		height: 45%;
+		width: 100%;
+		height: 400px;
   		overflow-x: auto;
   		overflow-y: auto;
 	    }
@@ -91,7 +91,7 @@
 	    }
 
 	    .song_row {
-		width:1000;
+		width: 1000px;
 		height:30px;
 		background-color: transparent;
 		overflow:hidden;
@@ -130,6 +130,31 @@
         </style>
     </head>
 
+    <script>
+    function refreshPage () {
+    	var page_y = $( document ).scrollTop();
+    	window.location.href = window.location.href + '?page_y=' + page_y;
+    }
+    window.onload = function () {
+    	setTimeout(refreshPage, 35000);
+    	if ( window.location.href.indexOf('page_y') != -1 ) {
+            var match = window.location.href.split('?')[1].split("&")[0].split("=");
+            $('html, body').scrollTop( match[1] );
+    	}
+
+        var div = document.getElementById("dvScroll");
+        var div_position = document.getElementById("div_position");
+        var position = parseInt('<%=Request.Form["div_position"] %>');
+        if (isNaN(position)) {
+            position = 0;
+        }
+        div.scrollTop = position;
+        div.onscroll = function() {
+            divdiv_position.value = div.scrollTop;
+        };
+    };
+    </script>
+
     <body>
         <nav class="navbar navbar-inverse">
           <div class="container">
@@ -156,7 +181,7 @@
 
 	<br>
 
-        <div class="container" style = "position:ralative; left:10px;">
+        <div class="container" style="height:100%">
 	    <form action="." method="POST">
                 <textarea class="form-control" style="border:1px solid black; resize:none;" name="contents" placeholder="Enter Spotify URL (song, artist, album, or playlist)"></textarea>
                 <input type="submit" class="my_button" name="cmd" value="Add Content" >
@@ -165,14 +190,10 @@
 		    <input type="submit" style ="background-color: rgb(156, 156, 87);" class="my_button" name="cmd" value="Continue Ranking">
                 {% endif %}
 		<input type="submit" style ="background-color: rgb(220, 80, 80);" class="my_button" name="cmd" value="Clear List">
-            </form>
-        </div>
+	    </form>
+	    <text style="color:red">{{message}}</text>
 
-        <div class="container">
-            <p style="color:red">{{message}}</p>
-        </div>
-
-        <div class="song-container" style = "position:relative; left:58px; top:2px; margin-bottom:16px;">
+        <div class="song-container"; id="dvScroll"; style = "position:relative; top:2px; margin-bottom:16px;">
 	    <div class = "song_row"; style="margin-top:10px; margin-bottom:-8px">
 		<song style = "margin-left:40px; top:50%"> Title </song>
 		<song style = "margin-left:10px; top:50%"> Artist </song>
@@ -192,6 +213,7 @@
 		</div>
 	    {% endfor %}
         </div>
+	</div>
 
     </body>
 </html>
